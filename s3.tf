@@ -1,9 +1,9 @@
-resource "aws_s3_bucket" "site" {
+resource "aws_s3_bucket" "rilsite" {
   bucket = "s3-static-website-bucket"
 }
 
-resource "aws_s3_bucket_website_configuration" "site" {
-  bucket = aws_s3_bucket.site.id
+resource "aws_s3_bucket_website_configuration" "rilsite" {
+  bucket = aws_s3_bucket.rilsite.id
 
   index_document {
     suffix = "index.html"
@@ -14,8 +14,8 @@ resource "aws_s3_bucket_website_configuration" "site" {
   }
 }
 
-resource "aws_s3_bucket_public_access_block" "site" {
-  bucket = aws_s3_bucket.site.id
+resource "aws_s3_bucket_public_access_block" "rilsite" {
+  bucket = aws_s3_bucket.rilsite.id
 
   block_public_acls       = true
   ignore_public_acls      = true
@@ -23,8 +23,8 @@ resource "aws_s3_bucket_public_access_block" "site" {
   restrict_public_buckets = false
 }
 
-resource "aws_s3_bucket_policy" "site_public_read" {
-  bucket = aws_s3_bucket.site.id
+resource "aws_s3_bucket_policy" "rilsite_public_read" {
+  bucket = aws_s3_bucket.rilsite.id
 
   policy = jsonencode({
     Version = "2012-10-17"
@@ -33,9 +33,9 @@ resource "aws_s3_bucket_policy" "site_public_read" {
       Effect    = "Allow"
       Principal = "*"
       Action    = "s3:GetObject"
-      Resource  = "${aws_s3_bucket.site.arn}/*"
+      Resource  = "${aws_s3_bucket.rilsite.arn}/*"
     }]
   })
 
-  depends_on = [aws_s3_bucket_public_access_block.site]
+  depends_on = [aws_s3_bucket_public_access_block.rilsite]
 }
