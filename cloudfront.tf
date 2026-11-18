@@ -5,7 +5,7 @@ resource "aws_cloudfront_distribution" "site" {
   price_class         = "PriceClass_100"
 
   origin {
-    domain_name = aws_s3_bucket_website_configuration.site.website_endpoint
+    domain_name = aws_s3_bucket_website_configuration.rilsite.website_endpoint
     origin_id   = "s3-static-website"
 
     custom_origin_config {
@@ -45,7 +45,7 @@ resource "aws_cloudfront_distribution" "site" {
     cloudfront_default_certificate = true
   }
 
-  depends_on = [aws_s3_bucket_policy.site_public_read]
+  depends_on = [aws_s3_bucket_policy.rilsite_public_read]
 }
 
 output "cloudfront_domain_name" {
