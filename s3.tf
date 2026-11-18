@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "rilsite" {
-  bucket = "s3-static-website-bucket"
+  bucket = "rilllls3-static-website-bucket"
 }
 
 resource "aws_s3_bucket_website_configuration" "rilsite" {
